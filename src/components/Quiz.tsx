@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronRight, CheckCircle2, BarChart3 } from "lucide-react";
+import { ChevronRight, CheckCircle2, BarChart3, Clock, FileText, Shield } from "lucide-react";
 import iceBadge from "@/assets/ice-badge.png";
+import trumpBrazil from "@/assets/trump-brazil.jpg";
 
 interface QuizOption {
   id: string;
@@ -142,26 +143,66 @@ const IntroScreen = ({ onStart }: IntroScreenProps) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.4 }}
-      className="flex-1 flex flex-col items-center justify-center px-6 py-12"
+      className="flex-1 flex flex-col items-center px-6 py-8 relative overflow-hidden"
     >
+      {/* Background gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-primary/10 pointer-events-none" />
+      
+      {/* Top decorative line */}
+      <motion.div
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: 1 }}
+        transition={{ delay: 0.1, duration: 0.6 }}
+        className="w-16 h-1 bg-gradient-to-r from-primary via-primary to-transparent rounded-full mb-6"
+      />
+
+      {/* Hero Image - Trump with Brazilian Flag */}
       <motion.div
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        transition={{ delay: 0.1, duration: 0.5 }}
-        className="w-32 h-32 mb-8 rounded-full overflow-hidden shadow-2xl border-4 border-primary/20"
+        transition={{ delay: 0.15, duration: 0.5 }}
+        className="w-full max-w-sm mb-6 rounded-xl overflow-hidden shadow-2xl border border-border/50"
+      >
+        <img
+          src={trumpBrazil}
+          alt="President Trump with Brazilian flag"
+          className="w-full h-auto object-cover"
+        />
+      </motion.div>
+
+      {/* ICE Badge with official styling */}
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ delay: 0.2, duration: 0.5 }}
+        className="w-24 h-24 mb-6 rounded-full overflow-hidden shadow-xl border-2 border-primary/30 bg-background"
       >
         <img
           src={iceBadge}
-          alt="ICE Badge"
+          alt="U.S. Immigration and Customs Enforcement"
           className="w-full h-full object-cover"
         />
+      </motion.div>
+
+      {/* Official-looking header badge */}
+      <motion.div
+        initial={{ y: 10, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.25, duration: 0.5 }}
+        className="flex items-center gap-2 mb-4"
+      >
+        <Shield className="w-4 h-4 text-primary" />
+        <span className="text-xs font-semibold uppercase tracking-widest text-primary">
+          Pesquisa de Opinião Pública
+        </span>
+        <Shield className="w-4 h-4 text-primary" />
       </motion.div>
 
       <motion.h1
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.2, duration: 0.5 }}
-        className="text-2xl md:text-3xl font-bold text-foreground text-center leading-tight mb-4"
+        transition={{ delay: 0.3, duration: 0.5 }}
+        className="text-2xl md:text-3xl font-bold text-foreground text-center leading-tight mb-3"
       >
         O que a direita brasileira pensa sobre a ICE dos EUA?
       </motion.h1>
@@ -169,22 +210,25 @@ const IntroScreen = ({ onStart }: IntroScreenProps) => {
       <motion.p
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.3, duration: 0.5 }}
-        className="text-muted-foreground text-center text-lg mb-2"
+        transition={{ delay: 0.35, duration: 0.5 }}
+        className="text-muted-foreground text-center text-base mb-6 max-w-sm"
       >
-        Quiz rápido para entender sua opinião
+        Pesquisa rápida e confidencial para entender sua opinião sobre políticas migratórias
       </motion.p>
 
+      {/* Info badges with icons */}
       <motion.div
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.35, duration: 0.5 }}
-        className="flex items-center gap-2 text-muted-foreground text-sm mb-10"
+        transition={{ delay: 0.4, duration: 0.5 }}
+        className="flex items-center gap-3 text-muted-foreground text-sm mb-8"
       >
-        <span className="inline-flex items-center gap-1 bg-muted px-3 py-1 rounded-full">
-          ⏱️ 2-3 minutos
+        <span className="inline-flex items-center gap-1.5 bg-muted/80 px-4 py-2 rounded-full border border-border/50">
+          <Clock className="w-4 h-4 text-primary" />
+          2-3 min
         </span>
-        <span className="inline-flex items-center gap-1 bg-muted px-3 py-1 rounded-full">
+        <span className="inline-flex items-center gap-1.5 bg-muted/80 px-4 py-2 rounded-full border border-border/50">
+          <FileText className="w-4 h-4 text-primary" />
           5 perguntas
         </span>
       </motion.div>
@@ -192,15 +236,25 @@ const IntroScreen = ({ onStart }: IntroScreenProps) => {
       <motion.button
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.4, duration: 0.5 }}
-        whileHover={{ scale: 1.02 }}
+        transition={{ delay: 0.45, duration: 0.5 }}
+        whileHover={{ scale: 1.02, boxShadow: "0 10px 40px -10px hsl(var(--primary) / 0.4)" }}
         whileTap={{ scale: 0.98 }}
         onClick={onStart}
-        className="w-full max-w-sm bg-primary text-primary-foreground font-semibold py-4 px-8 rounded-xl shadow-lg flex items-center justify-center gap-2 text-lg"
+        className="w-full max-w-sm bg-gradient-to-r from-primary to-primary/90 text-primary-foreground font-semibold py-4 px-8 rounded-xl shadow-lg flex items-center justify-center gap-2 text-lg uppercase tracking-wide"
       >
-        Começar Quiz
+        Iniciar Pesquisa
         <ChevronRight className="w-5 h-5" />
       </motion.button>
+
+      {/* Bottom disclaimer */}
+      <motion.p
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.6 }}
+        className="text-[10px] text-muted-foreground/60 mt-6 text-center uppercase tracking-wider"
+      >
+        Pesquisa independente • Dados anônimos
+      </motion.p>
     </motion.div>
   );
 };
