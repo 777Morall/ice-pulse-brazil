@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronRight, CheckCircle2, BarChart3, Clock, FileText, Shield } from "lucide-react";
+import { ChevronRight, CheckCircle2, Clock, FileText, Shield, Award, Star } from "lucide-react";
 import iceBadge from "@/assets/ice-badge.png";
 import trumpBrazil from "@/assets/trump-brazil.jpg";
 
@@ -392,13 +392,9 @@ interface ResultScreenProps {
 }
 
 const ResultScreen = ({ showResults, onShowResults, answers }: ResultScreenProps) => {
-  // Simple mock results for demonstration
-  const mockResults = [
-    { label: "Cumpriu bem seu papel", percentage: 45 },
-    { label: "Foi necessária, mas exagerou", percentage: 28 },
-    { label: "Agiu de forma incorreta", percentage: 15 },
-    { label: "Não tenho opinião", percentage: 12 },
-  ];
+  const handleReceiveBonus = () => {
+    window.open("https://wa.me/5511999999999?text=Quero%20receber%20minha%20bonifica%C3%A7%C3%A3o!", "_blank");
+  };
 
   return (
     <motion.div
@@ -406,22 +402,37 @@ const ResultScreen = ({ showResults, onShowResults, answers }: ResultScreenProps
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.4 }}
-      className="flex-1 flex flex-col items-center justify-center px-6 py-12"
+      className="flex-1 flex flex-col items-center px-6 py-8 relative"
     >
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-primary/10 pointer-events-none" />
+      
+      {/* Success icon with stars */}
       <motion.div
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ type: "spring", duration: 0.6 }}
-        className="w-20 h-20 rounded-full bg-quiz-success/20 flex items-center justify-center mb-6"
+        className="relative mb-6"
       >
-        <CheckCircle2 className="w-10 h-10 text-quiz-success" />
+        <div className="w-24 h-24 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center border-2 border-primary/30">
+          <CheckCircle2 className="w-12 h-12 text-primary" />
+        </div>
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ delay: 0.3, type: "spring" }}
+          className="absolute -top-2 -right-2 w-8 h-8 bg-primary rounded-full flex items-center justify-center"
+        >
+          <Star className="w-4 h-4 text-primary-foreground fill-primary-foreground" />
+        </motion.div>
       </motion.div>
 
+      {/* Main message */}
       <motion.h2
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.2 }}
-        className="text-2xl font-bold text-foreground mb-3"
+        className="text-2xl md:text-3xl font-bold text-foreground mb-3 text-center"
       >
         Obrigado por participar!
       </motion.h2>
@@ -430,67 +441,73 @@ const ResultScreen = ({ showResults, onShowResults, answers }: ResultScreenProps
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.3 }}
-        className="text-muted-foreground text-center mb-8 max-w-sm"
+        className="text-muted-foreground text-center mb-4 max-w-sm"
       >
-        Sua resposta ajuda a entender como brasileiros veem políticas de imigração internacionais.
+        Gostamos muito das suas respostas!
       </motion.p>
 
-      {!showResults ? (
-        <motion.button
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.4 }}
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          onClick={onShowResults}
-          className="w-full max-w-sm bg-secondary text-secondary-foreground font-semibold py-4 px-8 rounded-xl shadow-md flex items-center justify-center gap-2 text-base border border-border"
-        >
-          <BarChart3 className="w-5 h-5" />
-          Ver resultados gerais
-        </motion.button>
-      ) : (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="w-full max-w-sm"
-        >
-          <h3 className="text-sm font-semibold text-muted-foreground mb-4 text-center">
-            Pergunta 2: O que acham da ICE no governo Trump?
-          </h3>
-          <div className="space-y-3">
-            {mockResults.map((result, index) => (
-              <motion.div
-                key={result.label}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <div className="flex justify-between text-sm mb-1">
-                  <span className="text-foreground font-medium">{result.label}</span>
-                  <span className="text-primary font-semibold">{result.percentage}%</span>
-                </div>
-                <div className="h-2 bg-muted rounded-full overflow-hidden">
-                  <motion.div
-                    className="h-full bg-primary rounded-full"
-                    initial={{ width: 0 }}
-                    animate={{ width: `${result.percentage}%` }}
-                    transition={{ delay: 0.2 + index * 0.1, duration: 0.6 }}
-                  />
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-      )}
+      {/* Citizen recognition badge */}
+      <motion.div
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.35 }}
+        className="bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20 rounded-xl p-4 mb-6 max-w-sm w-full"
+      >
+        <div className="flex items-center gap-3 mb-2">
+          <Award className="w-6 h-6 text-primary" />
+          <span className="font-semibold text-foreground">Cidadão de Direita Autêntico</span>
+        </div>
+        <p className="text-sm text-muted-foreground">
+          Você demonstrou ser um verdadeiro cidadão de direita e merece ser recompensado pela sua opinião!
+        </p>
+      </motion.div>
 
-      <motion.p
+      {/* Bonus card */}
+      <motion.div
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.4 }}
+        className="bg-gradient-to-br from-background to-muted/50 border-2 border-primary/30 rounded-2xl p-6 mb-6 max-w-sm w-full shadow-xl"
+      >
+        <div className="text-center mb-4">
+          <span className="text-xs uppercase tracking-widest text-primary font-semibold">Bonificação Especial</span>
+          <div className="text-4xl font-bold text-foreground mt-2">
+            R$ 1.000
+          </div>
+          <p className="text-sm text-muted-foreground mt-2">
+            Você poderá receber uma bonificação exclusiva por sua participação
+          </p>
+        </div>
+
+        <motion.button
+          whileHover={{ scale: 1.02, boxShadow: "0 10px 40px -10px hsl(var(--primary) / 0.4)" }}
+          whileTap={{ scale: 0.98 }}
+          onClick={handleReceiveBonus}
+          className="w-full bg-gradient-to-r from-primary to-primary/90 text-primary-foreground font-semibold py-4 px-6 rounded-xl shadow-lg flex items-center justify-center gap-2 text-base uppercase tracking-wide"
+        >
+          <Award className="w-5 h-5" />
+          Receber Bonificação
+        </motion.button>
+      </motion.div>
+
+      {/* Footer with ICE logo */}
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6 }}
-        className="text-xs text-muted-foreground mt-12 text-center"
+        className="mt-auto pt-6 flex flex-col items-center gap-3"
       >
-        Quiz informativo – não afiliado ao governo dos EUA
-      </motion.p>
+        <div className="w-10 h-10 rounded-full overflow-hidden border border-border/50 shadow-sm">
+          <img
+            src={iceBadge}
+            alt="ICE"
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <p className="text-[10px] text-muted-foreground/60 text-center uppercase tracking-wider">
+          Pesquisa independente • Dados anônimos
+        </p>
+      </motion.div>
     </motion.div>
   );
 };
