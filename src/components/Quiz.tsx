@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronRight, CheckCircle2, Clock, FileText, Shield, Award, Star } from "lucide-react";
 import iceBadge from "@/assets/ice-badge.png";
@@ -392,8 +393,10 @@ interface ResultScreenProps {
 }
 
 const ResultScreen = ({ showResults, onShowResults, answers }: ResultScreenProps) => {
+  const navigate = useNavigate();
+  
   const handleReceiveBonus = () => {
-    window.open("https://wa.me/5511999999999?text=Quero%20receber%20minha%20bonifica%C3%A7%C3%A3o!", "_blank");
+    navigate("/informa");
   };
 
   return (
