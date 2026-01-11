@@ -29,6 +29,16 @@ const questions: QuizQuestion[] = [
   },
   {
     id: 2,
+    question: "Você sabia que a ICE oferece até US$ 1.000 para imigrantes ilegais que aceitem deixar os EUA voluntariamente?",
+    options: [
+      { id: "a", text: "Sim, já sabia" },
+      { id: "b", text: "Não sabia, mas acho uma boa política" },
+      { id: "c", text: "Não sabia, e discordo dessa prática" },
+      { id: "d", text: "Não tenho opinião formada" },
+    ],
+  },
+  {
+    id: 3,
     question: "Durante o governo Trump, você acha que a ICE:",
     options: [
       { id: "a", text: "Cumpriu bem seu papel" },
@@ -39,7 +49,17 @@ const questions: QuizQuestion[] = [
     showImage: true,
   },
   {
-    id: 3,
+    id: 4,
+    question: "Você apoia Donald Trump?",
+    options: [
+      { id: "a", text: "Sim, totalmente" },
+      { id: "b", text: "Sim, parcialmente" },
+      { id: "c", text: "Não" },
+      { id: "d", text: "Prefiro não responder" },
+    ],
+  },
+  {
+    id: 5,
     question: "No contexto dos EUA, você é a favor de políticas migratórias mais rígidas?",
     options: [
       { id: "a", text: "Totalmente a favor" },
@@ -49,7 +69,7 @@ const questions: QuizQuestion[] = [
     ],
   },
   {
-    id: 4,
+    id: 6,
     question: "Você acha que o Brasil deveria adotar algo parecido com a ICE?",
     options: [
       { id: "a", text: "Sim" },
@@ -59,7 +79,7 @@ const questions: QuizQuestion[] = [
     ],
   },
   {
-    id: 5,
+    id: 7,
     question: "Como você se identifica politicamente?",
     options: [
       { id: "a", text: "Direita" },
