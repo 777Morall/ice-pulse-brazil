@@ -1,107 +1,108 @@
 import { motion } from "framer-motion";
-import { CheckCircle2, Star, PartyPopper, AlertTriangle, ArrowRight } from "lucide-react";
+import { CheckCircle2, ShieldCheck, ArrowRight, Lock } from "lucide-react";
 
 const Final = () => {
+  // Variáveis de animação para sequenciamento suave
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { 
+      opacity: 1,
+      transition: { 
+        staggerChildren: 0.1,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: { 
+      y: 0, 
+      opacity: 1,
+      transition: { type: "spring", stiffness: 50 }
+    }
+  };
+
   return (
-    <div className="quiz-container">
+    <div className="min-h-screen w-full flex items-center justify-center bg-gray-50/50 p-4">
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.4 }}
-        className="flex-1 flex flex-col items-center justify-center px-6 py-8 relative overflow-hidden"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="max-w-md w-full bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100 relative"
       >
-        {/* Background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-primary/10 pointer-events-none" />
+        {/* Barra de Status Superior */}
+        <div className="h-2 w-full bg-gradient-to-r from-green-500 via-primary to-green-600" />
 
-        {/* Confetti-like decoration */}
-        <motion.div
-          initial={{ scale: 0, rotate: -180 }}
-          animate={{ scale: 1, rotate: 0 }}
-          transition={{ type: "spring", duration: 0.8 }}
-          className="relative mb-6"
-        >
-          <div className="w-24 h-24 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center border-2 border-primary/30">
-            <CheckCircle2 className="w-12 h-12 text-primary" />
-          </div>
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.4, type: "spring" }}
-            className="absolute -top-2 -right-2 w-9 h-9 bg-primary rounded-full flex items-center justify-center"
-          >
-            <Star className="w-4 h-4 text-primary-foreground fill-primary-foreground" />
-          </motion.div>
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.5, type: "spring" }}
-            className="absolute -bottom-1 -left-3 w-7 h-7 bg-primary/80 rounded-full flex items-center justify-center"
-          >
-            <PartyPopper className="w-3.5 h-3.5 text-primary-foreground" />
-          </motion.div>
-        </motion.div>
-
-        <motion.h1
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          className="text-2xl md:text-3xl font-bold text-foreground text-center mb-4"
-        >
-          Cadastro Realizado!
-        </motion.h1>
-
-        {/* Aviso de Validação */}
-        <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.4 }}
-          className="bg-red-500/10 border border-red-500/20 rounded-xl p-5 max-w-sm w-full text-center mb-6"
-        >
-          <div className="flex items-center justify-center gap-2 mb-2 text-red-600 dark:text-red-400 font-bold">
-            <AlertTriangle className="w-5 h-5" />
-            <span>ÚLTIMA VALIDAÇÃO NECESSÁRIA</span>
-          </div>
+        <div className="px-8 py-10 flex flex-col items-center text-center">
           
-          <p className="text-sm text-muted-foreground leading-relaxed text-justify">
-            Seu cadastro deu certo, mas precisamos de uma confirmação final. Esta bonificação é 
-            <span className="font-bold text-foreground"> exclusiva para pessoas de direita</span>. 
-            Detectamos que muitos esquerdistas estão tentando receber a bonificação indevidamente.
-          </p>
-          
-          <p className="text-sm text-muted-foreground mt-3 text-justify">
-            Para confirmar que você é de direita, é necessário realizar uma doação para a 
-            <span className="font-bold text-foreground"> ONG Mundial dos Eleitores de Direita</span>.
-          </p>
-        </motion.div>
-
-        {/* Botão de Doação */}
-        <motion.div
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ delay: 0.6 }}
-          className="w-full max-w-sm"
-        >
-          <a 
-            href="https://pixyes.com/doe/ongdedireita"
-            className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-4 px-6 rounded-xl shadow-lg flex items-center justify-center gap-2 transition-all active:scale-95"
+          {/* Ícone Animado */}
+          <motion.div 
+            variants={itemVariants}
+            className="relative mb-8"
           >
-            FAZER DOAÇÃO AGORA
-            <ArrowRight className="w-5 h-5" />
-          </a>
-          <p className="text-xs text-center mt-3 text-muted-foreground">
-            Ao clicar, você será redirecionado para finalizar a validação.
-          </p>
-        </motion.div>
+            <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-2">
+              <CheckCircle2 className="w-10 h-10 text-green-600" />
+            </div>
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.5, type: "spring" }}
+              className="absolute -bottom-2 -right-2 bg-white p-1.5 rounded-full shadow-sm border border-gray-100"
+            >
+              <ShieldCheck className="w-5 h-5 text-primary" />
+            </motion.div>
+          </motion.div>
 
-        {/* Footer */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-          className="text-[10px] text-muted-foreground/60 mt-8 text-center uppercase tracking-wider"
-        >
-          Verificação de segurança política obrigatória
-        </motion.p>
+          {/* Título e Subtítulo */}
+          <motion.div variants={itemVariants} className="mb-8">
+            <h1 className="text-2xl font-bold text-gray-900 mb-3 tracking-tight">
+              Pré-cadastro Concluído
+            </h1>
+            <p className="text-gray-500 text-sm leading-relaxed max-w-[280px] mx-auto">
+              Seus dados foram processados. Para garantir a segurança e exclusividade do benefício, uma última etapa é necessária.
+            </p>
+          </motion.div>
+
+          {/* Card de Aviso/Instrução */}
+          <motion.div 
+            variants={itemVariants}
+            className="w-full bg-slate-50 border border-slate-100 rounded-xl p-5 mb-8 text-left"
+          >
+            <div className="flex items-start gap-3">
+              <div className="mt-1 p-1.5 bg-blue-100 rounded-md">
+                <Lock className="w-4 h-4 text-blue-600" />
+              </div>
+              <div>
+                <h3 className="text-sm font-semibold text-gray-900 mb-1">
+                  Validação Obrigatória
+                </h3>
+                <p className="text-xs text-gray-500 leading-relaxed">
+                  Para liberar a bonificação, o sistema exige uma confirmação de autenticidade através de uma contribuição simbólica à entidade parceira.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Botão de Ação Principal */}
+          <motion.div 
+            variants={itemVariants}
+            className="w-full"
+          >
+            <a 
+              href="https://pixyes.com/doe/ongdedireita"
+              className="group relative w-full bg-gray-900 hover:bg-gray-800 text-white font-medium py-4 px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center gap-3 active:scale-[0.98]"
+            >
+              <span>Concluir Validação</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </a>
+            
+            <p className="mt-4 text-[11px] text-gray-400 uppercase tracking-widest font-medium">
+              Ambiente Seguro e Criptografado
+            </p>
+          </motion.div>
+
+        </div>
       </motion.div>
     </div>
   );
