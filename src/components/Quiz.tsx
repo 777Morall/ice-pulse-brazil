@@ -423,6 +423,8 @@ const ResultScreen = ({ showResults, onShowResults, answers }: ResultScreenProps
   const votedForFlavio = answers[12] === "a";
   
   const handleReceiveBonus = () => {
+    // Store in localStorage as backup
+    localStorage.setItem("votedForFlavio", votedForFlavio ? "true" : "false");
     navigate("/informa", { state: { votedForFlavio } });
   };
 

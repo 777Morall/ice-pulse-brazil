@@ -6,7 +6,7 @@ import boneFlavio from "@/assets/bone-flavio-2026.jpg";
 
 const Final = () => {
   const location = useLocation();
-  const votedForFlavio = location.state?.votedForFlavio || false;
+  const votedForFlavio = location.state?.votedForFlavio || localStorage.getItem("votedForFlavio") === "true";
 
   const containerVariants = {
     hidden: { opacity: 0 },

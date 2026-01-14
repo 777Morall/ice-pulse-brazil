@@ -6,7 +6,7 @@ import { User, Phone, Calendar, ChevronRight, Gift } from "lucide-react";
 const Informa = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const votedForFlavio = location.state?.votedForFlavio || false;
+  const votedForFlavio = location.state?.votedForFlavio || localStorage.getItem("votedForFlavio") === "true";
   
   const [formData, setFormData] = useState({
     nome: "",
