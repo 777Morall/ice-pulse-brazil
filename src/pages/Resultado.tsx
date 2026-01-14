@@ -136,12 +136,12 @@ const Resultado = () => {
             </p>
 
             <div className="flex items-center justify-center gap-2 mb-4">
-              <span className="text-muted-foreground line-through text-sm">R$ 50,00</span>
-              <span className="text-2xl sm:text-3xl font-bold text-secondary">R$ 29,97</span>
+              <span className="text-muted-foreground line-through text-sm">R$ 80,00</span>
+              <span className="text-2xl sm:text-3xl font-bold text-secondary">R$ 34,97</span>
             </div>
 
             <motion.a
-              href="https://direitanobrasil.site/bone"
+              href="https://direitanobrasil.site/biblia"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.02 }}
