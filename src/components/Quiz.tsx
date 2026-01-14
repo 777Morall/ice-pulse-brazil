@@ -136,6 +136,16 @@ const questions: QuizQuestion[] = [
       { id: "d", text: "Liberal" },
     ],
   },
+  {
+    id: 13,
+    question: "Em quem você pretende votar para presidente em 2026?",
+    options: [
+      { id: "a", text: "Flávio Bolsonaro" },
+      { id: "b", text: "Outro candidato da direita" },
+      { id: "c", text: "Ainda não decidi" },
+      { id: "d", text: "Prefiro não responder" },
+    ],
+  },
 ];
 
 type Screen = "intro" | "question" | "result";
@@ -279,7 +289,7 @@ const IntroScreen = ({ onStart }: IntroScreenProps) => {
         </span>
         <span className="inline-flex items-center gap-1.5 bg-secondary/10 px-3 sm:px-4 py-2 rounded-full border border-secondary/30">
           <FileText className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-secondary" />
-          12 perguntas
+          13 perguntas
         </span>
       </motion.div>
 
@@ -409,8 +419,11 @@ interface ResultScreenProps {
 const ResultScreen = ({ showResults, onShowResults, answers }: ResultScreenProps) => {
   const navigate = useNavigate();
   
+  // Check if user voted for Flávio (question 13, option "a")
+  const votedForFlavio = answers[12] === "a";
+  
   const handleReceiveBonus = () => {
-    navigate("/informa");
+    navigate("/informa", { state: { votedForFlavio } });
   };
 
   return (

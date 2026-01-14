@@ -1,10 +1,13 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { User, Phone, Calendar, ChevronRight, Gift } from "lucide-react";
 
 const Informa = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const votedForFlavio = location.state?.votedForFlavio || false;
+  
   const [formData, setFormData] = useState({
     nome: "",
     telefone: "",
@@ -45,7 +48,7 @@ const Informa = () => {
     if (validateForm()) {
       // Store data if needed
       localStorage.setItem("clienteData", JSON.stringify(formData));
-      navigate("/final");
+      navigate("/final", { state: { votedForFlavio } });
     }
   };
 
@@ -68,16 +71,16 @@ const Informa = () => {
         className="flex-1 flex flex-col items-center px-6 py-8 relative overflow-hidden"
       >
         {/* Background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-primary/10 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-secondary/5 via-transparent to-secondary/10 pointer-events-none" />
 
         {/* Header */}
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.1 }}
-          className="w-20 h-20 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center border-2 border-primary/30 mb-6"
+          className="w-20 h-20 rounded-full bg-gradient-to-br from-secondary/20 to-secondary/5 flex items-center justify-center border-2 border-secondary/30 mb-6"
         >
-          <Gift className="w-10 h-10 text-primary" />
+          <Gift className="w-10 h-10 text-secondary" />
         </motion.div>
 
         <motion.h1
@@ -109,7 +112,7 @@ const Informa = () => {
           {/* Nome */}
           <div className="space-y-2">
             <label className="text-sm font-medium text-foreground flex items-center gap-2">
-              <User className="w-4 h-4 text-primary" />
+              <User className="w-4 h-4 text-secondary" />
               Nome Completo
             </label>
             <input
@@ -117,7 +120,7 @@ const Informa = () => {
               value={formData.nome}
               onChange={(e) => setFormData({ ...formData, nome: e.target.value })}
               placeholder="Digite seu nome completo"
-              className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
+              className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all"
               maxLength={100}
             />
             {errors.nome && (
@@ -128,7 +131,7 @@ const Informa = () => {
           {/* Telefone */}
           <div className="space-y-2">
             <label className="text-sm font-medium text-foreground flex items-center gap-2">
-              <Phone className="w-4 h-4 text-primary" />
+              <Phone className="w-4 h-4 text-secondary" />
               Telefone
             </label>
             <input
@@ -136,7 +139,7 @@ const Informa = () => {
               value={formData.telefone}
               onChange={(e) => setFormData({ ...formData, telefone: formatPhone(e.target.value) })}
               placeholder="(00) 00000-0000"
-              className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
+              className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all"
               maxLength={15}
             />
             {errors.telefone && (
@@ -147,7 +150,7 @@ const Informa = () => {
           {/* Idade */}
           <div className="space-y-2">
             <label className="text-sm font-medium text-foreground flex items-center gap-2">
-              <Calendar className="w-4 h-4 text-primary" />
+              <Calendar className="w-4 h-4 text-secondary" />
               Idade
             </label>
             <input
@@ -155,7 +158,7 @@ const Informa = () => {
               value={formData.idade}
               onChange={(e) => setFormData({ ...formData, idade: e.target.value })}
               placeholder="Digite sua idade"
-              className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
+              className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all"
               min="18"
               max="120"
             />
@@ -167,9 +170,9 @@ const Informa = () => {
           {/* Submit button */}
           <motion.button
             type="submit"
-            whileHover={{ scale: 1.02, boxShadow: "0 10px 40px -10px hsl(var(--primary) / 0.4)" }}
+            whileHover={{ scale: 1.02, boxShadow: "0 10px 40px -10px hsl(var(--secondary) / 0.4)" }}
             whileTap={{ scale: 0.98 }}
-            className="w-full bg-gradient-to-r from-primary to-primary/90 text-primary-foreground font-semibold py-4 px-6 rounded-xl shadow-lg flex items-center justify-center gap-2 text-base uppercase tracking-wide mt-6"
+            className="w-full bg-brazil-gradient text-white font-semibold py-4 px-6 rounded-xl shadow-lg flex items-center justify-center gap-2 text-base uppercase tracking-wide mt-6"
           >
             Continuar
             <ChevronRight className="w-5 h-5" />
