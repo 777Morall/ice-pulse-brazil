@@ -7,42 +7,50 @@
 @layer base {
   :root {
     --background: 210 20% 98%;
-    --foreground: 215 25% 15%;
+    --foreground: 215 35% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 215 25% 15%;
+    --card-foreground: 215 35% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 215 25% 15%;
+    --popover-foreground: 215 35% 15%;
 
-    --primary: 215 50% 23%;
+    /* Brazilian blue - primary */
+    --primary: 210 100% 30%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 15% 92%;
-    --secondary-foreground: 215 25% 15%;
+    /* Brazilian green */
+    --secondary: 145 63% 32%;
+    --secondary-foreground: 0 0% 100%;
 
     --muted: 210 15% 95%;
     --muted-foreground: 215 10% 45%;
 
-    --accent: 210 80% 50%;
-    --accent-foreground: 0 0% 100%;
+    /* Brazilian yellow/gold */
+    --accent: 45 100% 50%;
+    --accent-foreground: 215 35% 15%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 210 15% 88%;
     --input: 210 15% 88%;
-    --ring: 215 50% 23%;
+    --ring: 210 100% 30%;
 
     --radius: 0.75rem;
 
-    /* Custom quiz tokens */
-    --quiz-navy: 215 50% 23%;
-    --quiz-navy-light: 215 40% 35%;
-    --quiz-gray: 210 10% 60%;
-    --quiz-light: 210 20% 97%;
+    /* Brazilian theme tokens */
+    --brazil-green: 145 63% 32%;
+    --brazil-yellow: 45 100% 50%;
+    --brazil-blue: 210 100% 30%;
+    --brazil-blue-dark: 215 80% 20%;
+    
+    /* Quiz tokens */
+    --quiz-green: 145 63% 32%;
+    --quiz-yellow: 45 100% 50%;
+    --quiz-blue: 210 100% 30%;
     --quiz-success: 145 60% 40%;
-    --quiz-progress: 210 80% 50%;
+    --quiz-progress: 145 63% 32%;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -115,29 +123,41 @@
 @layer utilities {
   .quiz-container {
     @apply min-h-screen bg-background flex flex-col;
+    -webkit-tap-highlight-color: transparent;
   }
 
   .quiz-card {
-    @apply bg-card rounded-xl shadow-lg border border-border p-6;
+    @apply bg-card rounded-xl shadow-lg border border-border p-4 sm:p-6;
   }
 
   .quiz-option {
-    @apply w-full p-4 text-left rounded-xl border-2 border-border bg-card 
+    @apply w-full p-3 sm:p-4 text-left rounded-xl border-2 border-border bg-card 
            transition-all duration-200 ease-out
-           hover:border-primary hover:bg-muted
+           hover:border-secondary hover:bg-secondary/10
            active:scale-[0.98];
+    -webkit-tap-highlight-color: transparent;
   }
 
   .quiz-option-selected {
-    @apply border-primary bg-primary/10 text-primary;
+    @apply border-secondary bg-secondary/15 text-secondary;
   }
 
   .quiz-progress-bar {
-    @apply h-1.5 bg-muted rounded-full overflow-hidden;
+    @apply h-2 bg-muted rounded-full overflow-hidden;
   }
 
   .quiz-progress-fill {
-    @apply h-full bg-accent rounded-full transition-all duration-500 ease-out;
+    @apply h-full rounded-full transition-all duration-500 ease-out;
+    background: linear-gradient(90deg, hsl(var(--brazil-green)), hsl(var(--brazil-yellow)));
+  }
+
+  /* Brazilian gradient backgrounds */
+  .bg-brazil-gradient {
+    background: linear-gradient(135deg, hsl(var(--brazil-green)) 0%, hsl(var(--brazil-blue)) 100%);
+  }
+
+  .bg-brazil-bar {
+    background: linear-gradient(90deg, hsl(var(--brazil-green)) 0%, hsl(var(--brazil-yellow)) 50%, hsl(var(--brazil-green)) 100%);
   }
 }
 
