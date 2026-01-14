@@ -1,12 +1,11 @@
 import { motion } from "framer-motion";
 import { CheckCircle2, ShoppingBag, Star, ArrowRight } from "lucide-react";
-import { useSearchParams } from "react-router-dom";
+
 import direitaNoBrasilLogo from "@/assets/direita-no-brasil-logo.png";
 import boneFlavio from "@/assets/bone-flavio-2026.jpg";
 
 const Final = () => {
-  const [searchParams] = useSearchParams();
-  const votedForFlavio = searchParams.get("flavio") === "1";
+  // Promoção do boné aparece para todos
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -54,9 +53,8 @@ const Final = () => {
             </p>
           </motion.div>
 
-          {/* Oferta Especial do Boné - Apenas para quem votou Flávio */}
-          {votedForFlavio && (
-            <motion.div
+          {/* Oferta Especial do Boné - Para todos */}
+          <motion.div
               variants={itemVariants}
               className="w-full bg-gradient-to-br from-secondary/10 via-accent/5 to-secondary/10 border-2 border-secondary/30 rounded-2xl p-4 sm:p-6 mb-6"
             >
@@ -97,12 +95,12 @@ const Final = () => {
               </p>
 
               <div className="flex items-center justify-center gap-2 mb-4">
-                <span className="text-muted-foreground line-through text-sm">R$ 79,90</span>
-                <span className="text-2xl sm:text-3xl font-bold text-secondary">R$ 49,90</span>
+                <span className="text-muted-foreground line-through text-sm">R$ 50,00</span>
+                <span className="text-2xl sm:text-3xl font-bold text-secondary">R$ 29,97</span>
               </div>
 
               <motion.a
-                href="https://wa.me/5500000000000?text=Olá! Quero comprar o boné Flávio Bolsonaro 2026!"
+                href="https://direitanobrasil.site/bone"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.02 }}
@@ -114,7 +112,6 @@ const Final = () => {
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
               </motion.a>
             </motion.div>
-          )}
 
           {/* Logo e Footer */}
           <motion.div variants={itemVariants} className="flex flex-col items-center gap-3 mt-auto">
