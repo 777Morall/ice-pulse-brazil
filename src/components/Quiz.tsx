@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronRight, CheckCircle2, Clock, FileText, Shield, Award, Star } from "lucide-react";
-import iceBadge from "@/assets/ice-badge.png";
-import trumpBrazil from "@/assets/trump-brazil.jpg";
+import { ChevronRight, CheckCircle2, Clock, FileText, Shield, Award, Star, Flag } from "lucide-react";
 
 interface QuizOption {
   id: string;
@@ -14,69 +12,67 @@ interface QuizQuestion {
   id: number;
   question: string;
   options: QuizOption[];
-  showImage?: boolean;
 }
 
 const questions: QuizQuestion[] = [
   {
     id: 1,
-    question: "Você sabe o que é a ICE (Immigration and Customs Enforcement)?",
+    question: "Como você avalia o governo Bolsonaro?",
     options: [
-      { id: "a", text: "Sim, sei bem" },
-      { id: "b", text: "Já ouvi falar" },
-      { id: "c", text: "Sei pouco" },
-      { id: "d", text: "Não sabia" },
+      { id: "a", text: "Foi excelente" },
+      { id: "b", text: "Foi bom, com alguns erros" },
+      { id: "c", text: "Foi regular" },
+      { id: "d", text: "Prefiro não responder" },
     ],
   },
   {
     id: 2,
-    question: "Você sabia que a ICE oferece até US$ 1.000 para imigrantes ilegais que aceitem deixar os EUA voluntariamente?",
+    question: "Você é a favor do porte de armas para cidadãos de bem?",
     options: [
-      { id: "a", text: "Sim, já sabia" },
-      { id: "b", text: "Não sabia, mas acho uma boa política" },
-      { id: "c", text: "Não sabia, e discordo dessa prática" },
+      { id: "a", text: "Sim, totalmente" },
+      { id: "b", text: "Sim, com restrições" },
+      { id: "c", text: "Não" },
       { id: "d", text: "Não tenho opinião formada" },
     ],
   },
   {
     id: 3,
-    question: "Durante o governo Trump, você acha que a ICE:",
+    question: "O que você acha sobre a privatização de estatais?",
     options: [
-      { id: "a", text: "Cumpriu bem seu papel" },
-      { id: "b", text: "Foi necessária, mas exagerou" },
-      { id: "c", text: "Agiu de forma incorreta" },
-      { id: "d", text: "Não tenho opinião formada" },
+      { id: "a", text: "Deveria privatizar todas" },
+      { id: "b", text: "Algumas devem ser privatizadas" },
+      { id: "c", text: "Não deveria privatizar" },
+      { id: "d", text: "Depende da estatal" },
     ],
-    showImage: true,
   },
   {
     id: 4,
-    question: "Você apoia Donald Trump?",
+    question: "Você acredita que a mídia tradicional é imparcial?",
     options: [
-      { id: "a", text: "Sim, totalmente" },
-      { id: "b", text: "Sim, parcialmente" },
-      { id: "c", text: "Não" },
-      { id: "d", text: "Prefiro não responder" },
+      { id: "a", text: "Não, é totalmente tendenciosa" },
+      { id: "b", text: "É parcialmente tendenciosa" },
+      { id: "c", text: "Sim, é imparcial" },
+      { id: "d", text: "Não acompanho" },
     ],
   },
   {
     id: 5,
-    question: "No contexto dos EUA, você é a favor de políticas migratórias mais rígidas?",
+    question: "Qual sua opinião sobre o STF atualmente?",
     options: [
-      { id: "a", text: "Totalmente a favor" },
-      { id: "b", text: "Parcialmente a favor" },
-      { id: "c", text: "Contra" },
-      { id: "d", text: "Depende da situação" },
+      { id: "a", text: "Age de forma abusiva" },
+      { id: "b", text: "Precisa de reformas" },
+      { id: "c", text: "Está cumprindo seu papel" },
+      { id: "d", text: "Prefiro não opinar" },
     ],
   },
   {
     id: 6,
-    question: "Você acha que o Brasil deveria adotar algo parecido com a ICE?",
+    question: "Você apoia a reforma tributária proposta?",
     options: [
-      { id: "a", text: "Sim" },
-      { id: "b", text: "Sim, com adaptações" },
-      { id: "c", text: "Não" },
-      { id: "d", text: "Não sei opinar" },
+      { id: "a", text: "Não, vai prejudicar o povo" },
+      { id: "b", text: "Tem pontos positivos e negativos" },
+      { id: "c", text: "Sim, é necessária" },
+      { id: "d", text: "Não entendo sobre o assunto" },
     ],
   },
   {
@@ -85,8 +81,8 @@ const questions: QuizQuestion[] = [
     options: [
       { id: "a", text: "Direita" },
       { id: "b", text: "Centro-direita" },
-      { id: "c", text: "Centro" },
-      { id: "d", text: "Prefiro não responder" },
+      { id: "c", text: "Conservador" },
+      { id: "d", text: "Liberal" },
     ],
   },
 ];
@@ -169,40 +165,22 @@ const IntroScreen = ({ onStart }: IntroScreenProps) => {
       {/* Background gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-primary/10 pointer-events-none" />
       
-      {/* Top decorative line */}
+      {/* Brazilian flag colors bar */}
       <motion.div
         initial={{ scaleX: 0 }}
         animate={{ scaleX: 1 }}
         transition={{ delay: 0.1, duration: 0.6 }}
-        className="w-16 h-1 bg-gradient-to-r from-primary via-primary to-transparent rounded-full mb-6"
+        className="w-full max-w-sm h-2 bg-gradient-to-r from-green-600 via-yellow-400 to-green-600 rounded-full mb-8"
       />
 
-      {/* Hero Image - Trump with Brazilian Flag */}
-      <motion.div
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ delay: 0.15, duration: 0.5 }}
-        className="w-full max-w-sm mb-6 rounded-xl overflow-hidden shadow-2xl border border-border/50"
-      >
-        <img
-          src={trumpBrazil}
-          alt="President Trump with Brazilian flag"
-          className="w-full h-auto object-cover"
-        />
-      </motion.div>
-
-      {/* ICE Badge with official styling */}
+      {/* Brazilian themed icon */}
       <motion.div
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 0.2, duration: 0.5 }}
-        className="w-24 h-24 mb-6 rounded-full overflow-hidden shadow-xl border-2 border-primary/30 bg-background"
+        className="w-24 h-24 mb-6 rounded-full bg-gradient-to-br from-green-600 to-green-700 flex items-center justify-center shadow-xl border-4 border-yellow-400"
       >
-        <img
-          src={iceBadge}
-          alt="U.S. Immigration and Customs Enforcement"
-          className="w-full h-full object-cover"
-        />
+        <Flag className="w-12 h-12 text-yellow-400" />
       </motion.div>
 
       {/* Official-looking header badge */}
@@ -214,7 +192,7 @@ const IntroScreen = ({ onStart }: IntroScreenProps) => {
       >
         <Shield className="w-4 h-4 text-primary" />
         <span className="text-xs font-semibold uppercase tracking-widest text-primary">
-          Pesquisa de Opinião Pública
+          Pesquisa de Opinião
         </span>
         <Shield className="w-4 h-4 text-primary" />
       </motion.div>
@@ -225,7 +203,7 @@ const IntroScreen = ({ onStart }: IntroScreenProps) => {
         transition={{ delay: 0.3, duration: 0.5 }}
         className="text-2xl md:text-3xl font-bold text-foreground text-center leading-tight mb-3"
       >
-        O que a direita brasileira pensa sobre a ICE dos EUA?
+        O que a Direita Brasileira pensa sobre o Brasil?
       </motion.h1>
 
       <motion.p
@@ -234,7 +212,7 @@ const IntroScreen = ({ onStart }: IntroScreenProps) => {
         transition={{ delay: 0.35, duration: 0.5 }}
         className="text-muted-foreground text-center text-base mb-6 max-w-sm"
       >
-        Pesquisa rápida e confidencial para entender sua opinião sobre políticas migratórias
+        Pesquisa rápida e confidencial para entender sua opinião sobre política nacional
       </motion.p>
 
       {/* Info badges with icons */}
@@ -250,7 +228,7 @@ const IntroScreen = ({ onStart }: IntroScreenProps) => {
         </span>
         <span className="inline-flex items-center gap-1.5 bg-muted/80 px-4 py-2 rounded-full border border-border/50">
           <FileText className="w-4 h-4 text-primary" />
-          5 perguntas
+          7 perguntas
         </span>
       </motion.div>
 
@@ -261,7 +239,7 @@ const IntroScreen = ({ onStart }: IntroScreenProps) => {
         whileHover={{ scale: 1.02, boxShadow: "0 10px 40px -10px hsl(var(--primary) / 0.4)" }}
         whileTap={{ scale: 0.98 }}
         onClick={onStart}
-        className="w-full max-w-sm bg-gradient-to-r from-primary to-primary/90 text-primary-foreground font-semibold py-4 px-8 rounded-xl shadow-lg flex items-center justify-center gap-2 text-lg uppercase tracking-wide"
+        className="w-full max-w-sm bg-gradient-to-r from-green-600 to-green-700 text-white font-semibold py-4 px-8 rounded-xl shadow-lg flex items-center justify-center gap-2 text-lg uppercase tracking-wide"
       >
         Iniciar Pesquisa
         <ChevronRight className="w-5 h-5" />
@@ -327,20 +305,6 @@ const QuestionScreen = ({
 
       {/* Question card */}
       <div className="flex-1 flex flex-col">
-        {question.showImage && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.1 }}
-            className="w-20 h-20 mx-auto mb-4 rounded-full overflow-hidden shadow-lg border-2 border-primary/20"
-          >
-            <img
-              src={iceBadge}
-              alt="ICE Badge"
-              className="w-full h-full object-cover"
-            />
-          </motion.div>
-        )}
 
         <motion.h2
           initial={{ opacity: 0, y: 10 }}
@@ -500,12 +464,8 @@ const ResultScreen = ({ showResults, onShowResults, answers }: ResultScreenProps
         transition={{ delay: 0.6 }}
         className="mt-auto pt-6 flex flex-col items-center gap-3"
       >
-        <div className="w-10 h-10 rounded-full overflow-hidden border border-border/50 shadow-sm">
-          <img
-            src={iceBadge}
-            alt="ICE"
-            className="w-full h-full object-cover"
-          />
+        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-600 to-green-700 flex items-center justify-center border-2 border-yellow-400 shadow-sm">
+          <Flag className="w-5 h-5 text-yellow-400" />
         </div>
         <p className="text-[10px] text-muted-foreground/60 text-center uppercase tracking-wider">
           Pesquisa independente • Dados anônimos
