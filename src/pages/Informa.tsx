@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { User, Phone, Calendar, ChevronRight, Gift } from "lucide-react";
 
 const Informa = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const votedForFlavio = location.state?.votedForFlavio || localStorage.getItem("votedForFlavio") === "true";
+  const [searchParams] = useSearchParams();
+  const votedForFlavio = searchParams.get("flavio") === "1";
   
   const [formData, setFormData] = useState({
     nome: "",
@@ -46,9 +46,8 @@ const Informa = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
-      // Store data if needed
       localStorage.setItem("clienteData", JSON.stringify(formData));
-      navigate("/final", { state: { votedForFlavio } });
+      navigate(`/final?flavio=${votedForFlavio ? "1" : "0"}`);
     }
   };
 

@@ -1,12 +1,12 @@
 import { motion } from "framer-motion";
 import { CheckCircle2, ShoppingBag, Star, ArrowRight } from "lucide-react";
-import { useLocation } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import direitaNoBrasilLogo from "@/assets/direita-no-brasil-logo.png";
 import boneFlavio from "@/assets/bone-flavio-2026.jpg";
 
 const Final = () => {
-  const location = useLocation();
-  const votedForFlavio = location.state?.votedForFlavio || localStorage.getItem("votedForFlavio") === "true";
+  const [searchParams] = useSearchParams();
+  const votedForFlavio = searchParams.get("flavio") === "1";
 
   const containerVariants = {
     hidden: { opacity: 0 },
