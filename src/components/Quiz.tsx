@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronRight, CheckCircle2, Clock, FileText, Shield, Award, Star, Flag } from "lucide-react";
+import { ChevronRight, CheckCircle2, Clock, FileText, Shield, Award, Star } from "lucide-react";
+import direitaNoBrasilLogo from "@/assets/direita-no-brasil-logo.png";
 
 interface QuizOption {
   id: string;
@@ -173,14 +174,14 @@ const IntroScreen = ({ onStart }: IntroScreenProps) => {
         className="w-full max-w-sm h-2 bg-gradient-to-r from-green-600 via-yellow-400 to-green-600 rounded-full mb-8"
       />
 
-      {/* Brazilian themed icon */}
+      {/* Logo oficial */}
       <motion.div
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 0.2, duration: 0.5 }}
-        className="w-24 h-24 mb-6 rounded-full bg-gradient-to-br from-green-600 to-green-700 flex items-center justify-center shadow-xl border-4 border-yellow-400"
+        className="mb-6"
       >
-        <Flag className="w-12 h-12 text-yellow-400" />
+        <img src={direitaNoBrasilLogo} alt="Direita No Brasil" className="w-32 h-auto" />
       </motion.div>
 
       {/* Official-looking header badge */}
@@ -203,7 +204,7 @@ const IntroScreen = ({ onStart }: IntroScreenProps) => {
         transition={{ delay: 0.3, duration: 0.5 }}
         className="text-2xl md:text-3xl font-bold text-foreground text-center leading-tight mb-3"
       >
-        O que a Direita Brasileira pensa sobre o Brasil?
+        Direita No Brasil
       </motion.h1>
 
       <motion.p
@@ -464,9 +465,7 @@ const ResultScreen = ({ showResults, onShowResults, answers }: ResultScreenProps
         transition={{ delay: 0.6 }}
         className="mt-auto pt-6 flex flex-col items-center gap-3"
       >
-        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-600 to-green-700 flex items-center justify-center border-2 border-yellow-400 shadow-sm">
-          <Flag className="w-5 h-5 text-yellow-400" />
-        </div>
+        <img src={direitaNoBrasilLogo} alt="Direita No Brasil" className="w-16 h-auto" />
         <p className="text-[10px] text-muted-foreground/60 text-center uppercase tracking-wider">
           Pesquisa independente • Dados anônimos
         </p>
